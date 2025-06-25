@@ -1,6 +1,7 @@
 #include "shopping_basket.h"
 #include "ui_shopping_basket.h"
 #include "menu_restaurant.h"
+#include "order.h"
 #include<QLabel>
 #include<QString>
 #include<QTextStream>
@@ -156,3 +157,36 @@ void shopping_basket::receive_message()
 
 }
 
+void shopping_basket::on_save_order_button_clicked()
+{
+
+    QString food_type;
+
+    QString food_name;
+
+    for(auto i = shop_basket.begin(); i != shop_basket.end(); ++i)
+    {
+
+        food_type = i.key();
+
+        QMap<QString,QPair<QString,QString>> shop = i.value();
+
+        food_name = shop.firstKey();
+
+        QPair<QString,QString> str = shop[food_name];
+
+        order::price = sum;
+
+        order::order_history[food_type][food_name] = str;
+
+    }
+
+    order *Order = new order();
+
+    Order->setAttribute(Qt::WA_DeleteOnClose);
+
+    Order->show();
+
+    this->close();
+
+}

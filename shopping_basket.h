@@ -44,6 +44,8 @@ public slots:
 
     void send_message();
 
+    void on_save_order_button_clicked();
+
 private:
     Ui::shopping_basket *ui;
 };
